@@ -3,13 +3,13 @@ name: publish
 on: [push]
 
 jobs:
-  publish-hello-world-image:
-    runs-on: ubuntu-latest
+  publish-iec61850-image:
+    runs-on: debian-latest
 
     steps:
     - uses: actions/checkout@v2
 
-    - name: Build the hello-world Docker image
+    - name: Build the iec61850 Docker image
       run: |
         echo $CR_PAT | docker login ghcr.io -u IWaheed --password-stdin
       env:
