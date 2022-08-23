@@ -1,0 +1,31 @@
+name: publish docker image
+
+on: 
+  push:
+    branches: [ main ]
+  release:
+    types:
+      - published
+      
+jobs:
+  build:
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    runs-on: debian-latest
+    
+    steps:
+    - name: Build the iec61850 Docker image
+    - uses: actions/checkout@v2
+    
+    - name: Docker meta
+      id: docker_meta
+      uses: crazy-max/ghaction-docker-meta@v1
+      with:
+        images: ghcr.io/IWaheed/iec61850_docker
+        tag-sha: true
+        tag-edge: true
+        tag-latest: true
+        
+    - name: login to GHCR
+      uses: docker/login-action@v1
+      with:
+      
